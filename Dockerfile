@@ -1,9 +1,6 @@
 # ベースイメージを指定
 FROM ubuntu
 
-# Jupyter Notebookログイン用のトークン
-ENV TOKEN="hoge"
-
 # 作業ディレクトリを指定
 WORKDIR /app
 
@@ -31,6 +28,7 @@ COPY . .
 RUN /venv/bin/pip install --no-cache-dir -r requirements.txt
 
 # Jupyterの設定ファイルを生成し, ログイン用のトークンを設定
+ENV TOKEN="hoge"
 RUN /venv/bin/jupyter notebook --generate-config \
     && echo "c.NotebookApp.token = '${TOKEN}'" > /root/.jupyter/jupyter_notebook_config.py
 
