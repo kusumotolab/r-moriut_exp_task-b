@@ -15,11 +15,9 @@ RUN apt-get update \
     python3-venv \
     nodejs
 
-# 仮想環境の作成とアクティベート
+# 仮想環境を作成し，pipを最新バージョンにアップグレード
 RUN python3 -m venv /venv
-
-# 仮想環境をアクティベートした状態でpipを最新バージョンにアップグレード
-RUN /venv/bin/pip install --upgrade pip
+    && /venv/bin/pip install --upgrade pip
 
 # Pythonパッケージ一覧とソースコード・データセット等をコンテナにコピー
 COPY . .
@@ -27,7 +25,7 @@ COPY . .
 # 必要なPythonパッケージをインストール
 RUN /venv/bin/pip install --no-cache-dir -r requirements.txt
 
-# Jupyterの設定ファイルを生成し, ログイン用のトークンを設定
+# Jupyterの設定ファイルを生成し，ログイン用のトークンを設定
 ENV TOKEN="hoge"
 RUN /venv/bin/jupyter notebook --generate-config \
     && echo "c.NotebookApp.token = '${TOKEN}'" > /root/.jupyter/jupyter_notebook_config.py
