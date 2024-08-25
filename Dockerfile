@@ -15,22 +15,20 @@ RUN apt-get update \
     python3-venv \
     nodejs
 
-# 仮想環境を作成し，pipを最新バージョンにアップグレード
-RUN python3 -m venv /venv
-    && /venv/bin/pip install --upgrade pip
-
-# Pythonパッケージ一覧とソースコード・データセット等をコンテナにコピー
+# Pythonパッケージ一覧とオリジナル演習課題をコンテナにコピー
 COPY . .
 
-# 必要なPythonパッケージをインストール
-RUN /venv/bin/pip install --no-cache-dir -r requirements.txt
+# 仮想環境下で必要なPythonパッケージをインストール
+RUN python3 -m venv /venv \
+    && /venv/bin/pip install --upgrade pip \
+    && /venv/bin/pip install --no-cache-dir -r requirements.txt
 
 # Jupyterの設定ファイルを生成し，ログイン用のトークンを設定
 ENV TOKEN="hoge"
 RUN /venv/bin/jupyter notebook --generate-config \
     && echo "c.NotebookApp.token = '${TOKEN}'" > /root/.jupyter/jupyter_notebook_config.py
 
-# GitHubからサンプルコードをclone
+# GitHubからサンプルプログラムをclone
 RUN mkdir sample \
     && cd sample \
     && git clone https://github.com/fchollet/deep-learning-with-python-notebooks.git
