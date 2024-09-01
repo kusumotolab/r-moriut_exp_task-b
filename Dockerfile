@@ -15,7 +15,7 @@ RUN apt-get update \
     python3-venv \
     nodejs
 
-# Pythonパッケージ一覧とオリジナル演習課題をコンテナにコピー
+# Pythonパッケージ一覧とオリジナル演習の題材をコンテナにコピー
 COPY . .
 
 # 仮想環境下で必要なPythonパッケージをインストール
@@ -28,7 +28,7 @@ ENV TOKEN="hoge"
 RUN /venv/bin/jupyter notebook --generate-config \
     && echo "c.NotebookApp.token = '${TOKEN}'" > /root/.jupyter/jupyter_notebook_config.py
 
-# GitHubからサンプルプログラムをclone
+# GitHubから教科書演習の題材をclone
 RUN mkdir sample \
     && cd sample \
     && git clone https://github.com/fchollet/deep-learning-with-python-notebooks.git
