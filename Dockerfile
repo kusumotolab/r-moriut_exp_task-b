@@ -29,9 +29,7 @@ RUN /venv/bin/jupyter notebook --generate-config \
     && echo "c.NotebookApp.token = '${TOKEN}'" > /root/.jupyter/jupyter_notebook_config.py
 
 # GitHubから教科書演習の題材をclone
-RUN mkdir sample \
-    && cd sample \
-    && git clone https://github.com/fchollet/deep-learning-with-python-notebooks.git
+RUN git clone https://github.com/fchollet/deep-learning-with-python-notebooks.git subject-book
 
 # ポートの指定
 EXPOSE 8888
