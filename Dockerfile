@@ -1,5 +1,5 @@
 # ベースイメージを指定
-FROM ubuntu
+FROM ubuntu:24.04
 
 # 作業ディレクトリを指定
 WORKDIR /app
