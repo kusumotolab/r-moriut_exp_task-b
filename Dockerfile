@@ -28,8 +28,8 @@ ENV TOKEN="hoge"
 RUN /venv/bin/jupyter notebook --generate-config \
     && echo "c.NotebookApp.token = '${TOKEN}'" > /root/.jupyter/jupyter_notebook_config.py
 
-# GitHubから教科書演習の題材をclone
-RUN git clone https://github.com/fchollet/deep-learning-with-python-notebooks.git subject-book
+# GitHub上に公開されている演習の題材をclone
+RUN git clone https://github.com/fchollet/deep-learning-with-python-notebooks.git subject-github
 
 # ポートの指定
 EXPOSE 8888
