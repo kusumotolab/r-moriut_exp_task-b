@@ -23,10 +23,9 @@ RUN python3 -m venv /venv \
     && /venv/bin/pip install --upgrade pip \
     && /venv/bin/pip install --no-cache-dir -r requirements.txt
 
-# Jupyterの設定ファイルを生成し，ログイン用のトークンを設定
-ENV TOKEN="hoge"
+# Jupyterの設定ファイルを生成し，ログイン用のトークン（hoge）を設定
 RUN /venv/bin/jupyter notebook --generate-config \
-    && echo "c.NotebookApp.token = '${TOKEN}'" > /root/.jupyter/jupyter_notebook_config.py
+    && echo "c.NotebookApp.token = 'hoge'" > /root/.jupyter/jupyter_notebook_config.py
 
 # GitHub上に公開されている演習の題材をclone
 RUN git clone https://github.com/fchollet/deep-learning-with-python-notebooks.git subject-github
