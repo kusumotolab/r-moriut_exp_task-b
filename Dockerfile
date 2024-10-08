@@ -9,7 +9,6 @@ RUN apt-get update \
     && apt-get install -y \
     build-essential \
     git \
-    musl-dev \
     python3 \
     python3-dev \
     python3-venv \
